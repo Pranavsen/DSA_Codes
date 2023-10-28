@@ -1,0 +1,35 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+class tab{
+    public:
+    long long rainwater(int arr[],int n){
+        int mgl[n];
+        int mgr[n];
+        mgl[0]=arr[0];
+        mgr[n-1]=arr[n-1];
+        int max1=arr[0],max2=arr[n-1];
+        for(int i=1;i<n;i++){
+            max1=max(max1,arr[i]);
+            mgl[i]=max1;
+        }
+        for(int i=n-2;i>=0;i--){
+            max2=max(max2,arr[i]);
+           mgr[i]=max2;
+        }
+        
+        long long sum=0;
+        for(int i=0;i<n;i++){
+            sum=sum+min(mgl[i],mgr[i])-arr[i];
+        }
+        return sum;
+    }
+};
+int main()
+{
+    int n=6;
+    int arr[n]={3,0,0,2,0,4};
+    tab t;
+    cout<<t.rainwater(arr,n);
+    return 0;
+}

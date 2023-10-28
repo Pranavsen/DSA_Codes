@@ -1,0 +1,115 @@
+//Linked List CPP
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+ int data;
+ Node *next;
+};
+
+ 
+void create(Node* &first,int A[],int n)
+{
+ Node *last,*t;
+ int i=0;
+
+ first=new Node;
+ first->data=A[0];
+ first->next=NULL;
+ last=first;
+ 
+ for(i=1;i<n;i++)
+ {
+ t=new Node;
+ t->data=A[i];
+ t->next=NULL;
+ last->next=t;
+ last=t;
+ }
+}
+
+void Display(Node* first)
+{
+ Node* p=first;
+
+ while(p)
+ {
+ cout<<p->data<<" ";
+ p=p->next;
+ }
+ cout<<endl;
+}
+Node* merge(Node* &first1,Node* &first2){
+     
+    Node *p1=first1;
+    Node* p2=first2;
+    Node* dummyNode=new Node;
+    Node* p3=dummyNode;
+    while(p1!=NULL && p2!=NULL){
+        if(p1->data<p2->data){
+            p3->next=p1;
+            p1=p1->next;
+        }
+        else{
+            p3->next=p2;
+            p2=p2->next;
+        }
+        p3=p3->next;
+    }
+    while(p1!=NULL){
+        p3->next=p1;
+        p1=p1->next;
+        p3=p3->next;
+    }
+    while(p2!=NULL){
+        p3->next=p2;
+        p2=p2->next;
+        p3=p3->next;
+    }
+    return (dummyNode->next);
+}
+////////////////////////////////////////////////////////
+Node* merge(Node* &first1,Node* &first2){
+    Node *p1=first1;
+    Node* p2=first2;
+    Node* dummyNode=NULL;
+    
+    while(p1!=NULL && p2!=NULL){
+        if(p1->data<p2->data){
+            first1->next=merge(first1->next,first2);
+            return first1;
+        }
+        else{
+            first2->next=merge(first1,first2->next);
+            return first2;
+        }
+    }
+    while(p1!=NULL){
+        return first1;
+    }
+    while(p2!=NULL){
+        return first2;
+    }
+} 
+/////////////////////////////////////////////////////////
+
+int main()
+{ Node* first1=NULL;
+  Node* first2=NULL;
+  
+ int A1[]={2,5,9,12,15,20};
+ int A2[]={3,4,8,14,21,22};
+ 
+ create(first1,A1,6);
+ Display(first1);
+ create(first2,A2,6);
+ Display(first2);
+ 
+ Node* newNode=merge(first1,first2);
+ Display(newNode);
+
+ return 0;
+}
+

@@ -1,0 +1,119 @@
+//Linked List CPP
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+ int data;
+ Node *next;
+};
+
+ 
+void create(Node* &first,int A[],int n)
+{
+ Node *last,*t;
+ int i=0;
+
+ first=new Node;
+ first->data=A[0];
+ first->next=NULL;
+ last=first;
+ 
+ for(i=1;i<n;i++)
+ {
+ t=new Node;
+ t->data=A[i];
+ t->next=NULL;
+ last->next=t;
+ last=t;
+ }
+}
+
+void Display(Node* first)
+{
+ Node* p=first;
+
+ while(p)
+ {
+ cout<<p->data<<" ";
+ p=p->next;
+ }
+ cout<<endl;
+}
+void createcycle(Node* &first,int pos){
+    Node* temp=first;
+    Node* startnode;
+    int count=1;
+    while(temp->next!=NULL){
+        if(count==pos){
+            startnode=temp;
+        }
+        temp=temp->next;
+        count++;
+    }
+    temp->next=startnode;
+}
+bool detectcycle(Node* &first){
+    Node* slow=first;
+    Node* fast=first;
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(fast==slow){
+        return true;}
+    }
+    return false;
+}
+void removecycle(Node* &first){
+    Node *slow=first;
+       Node *fast=first;
+       if(first==NULL || first->next==NULL){
+           return;
+       }
+       while(fast!=NULL && fast->next!=NULL){
+           slow=slow->next;
+           fast=fast->next->next;
+           if(slow==fast)
+           break;
+           
+       }
+       if(slow!=fast){
+           return;
+       }
+       if(slow==first){
+           while(fast->next!=slow){
+               fast=fast->next;
+           }
+           fast->next=NULL;
+       }
+       else{
+       slow=first;
+       while(fast->next!=slow->next){
+           fast=fast->next;
+           slow=slow->next;
+           
+       }
+       fast->next=NULL;
+       }
+       return;
+   
+    }
+
+int main()
+{ 
+ Node* first=NULL;
+ int A1[]={2,5,9,12,15,20};
+ create(first,A1,6);
+ Display(first);
+ createcycle(first,3);
+ //Display(first);
+ cout<<detectcycle(first)<<endl;
+ 
+ removecycle(first);
+ Display(first);
+ 
+ 
+ return 0;
+}
+

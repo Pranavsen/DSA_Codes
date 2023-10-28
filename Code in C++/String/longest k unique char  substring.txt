@@ -1,0 +1,42 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ string unique(string s,int K){
+     int n=s.length();
+     int res=-1;
+     int i=0,j=0;
+     unordered_map<char,int>mp;
+     
+     while(j<n){
+         mp[s[j]]++;
+         if(mp.size()<K)
+         j++;
+         
+         else if(mp.size()==K){
+             res=max(res,j-i+1);
+             j++;
+         }
+         else{
+             while(mp.size()>K){
+                 mp[s[i]]--;
+                 if(mp[s[i]]==0)
+                 mp.erase(s[i]);
+                 i++;
+             }
+             j++;
+         }
+             
+     }
+     //return res;                    //it is for return the length
+     return s.substr(i,j-i+1);      //it is for return the string
+ }
+
+int main()
+{
+    string s="aabacbebebe";
+    int K=3;
+    cout<< unique(s,K);
+
+    return 0;
+}

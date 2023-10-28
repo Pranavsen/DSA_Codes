@@ -1,0 +1,92 @@
+//Linked List CPP
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+ int data;
+ Node *next;
+};
+Node* reverse(Node* current){
+    Node* prev=NULL;
+    Node* nex=NULL;
+    while(current!=NULL){
+        nex=current->next;
+        current->next=prev;
+        prev=current;
+        current=nex;
+    }
+    current=prev;
+    return current;
+}
+ 
+void create(Node* &first,int A[],int n)
+{
+ Node *last,*t;
+ int i=0;
+
+ first=new Node;
+ first->data=A[0];
+ first->next=NULL;
+ last=first;
+ 
+ for(i=1;i<n;i++)
+ {
+ t=new Node;
+ t->data=A[i];
+ t->next=NULL;
+ last->next=t;
+ last=t;
+ }
+}
+
+void Display(Node* first)
+{
+ Node* p=first;
+
+ while(p)
+ {
+ cout<<p->data<<" ";
+ p=p->next;
+ }
+ cout<<endl;
+}
+Node* addone(Node* first){
+    Node* new_head=reverse(first);
+    Node* current=new_head,*prev=NULL,*p=new_head;
+    int carry=0;
+    while(current!=NULL){
+        int sum=0;
+        if(prev==NULL){
+             sum=current->data+1;
+        }
+        else{
+            sum=current->data+carry;
+        }
+        carry=sum/10;
+        current->data=sum%10;
+        prev=current;
+        current=current->next;
+    }
+    if(carry==1){
+        Node* new_head=new Node;
+        new_head->data=1;
+        new_head->next=NULL;
+        prev->next=new_head;
+    }
+    return reverse(p);
+}
+
+
+int main()
+{ Node* first=NULL;
+ int A1[]={9,9,9};
+ create(first,A1,3);
+ Display(first);
+ Node* add=addone(first);
+ Display(add);
+
+ return 0;
+}
+

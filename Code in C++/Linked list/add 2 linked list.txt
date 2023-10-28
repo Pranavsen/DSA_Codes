@@ -1,0 +1,111 @@
+//Linked List CPP
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+ int data;
+ Node *next;
+ 
+};
+Node* node(int data)
+{
+   Node* new_node = new Node();
+    new_node->data = data;
+    new_node->next = NULL;
+    return new_node;
+}
+
+void create(Node* &first,int A[],int n)
+{
+ Node *last,*t;
+ int i=0;
+
+ first=new Node;
+ first->data=A[0];
+ first->next=NULL;
+ last=first;
+ 
+ for(i=1;i<n;i++)
+ {
+ t=new Node;
+ t->data=A[i];
+ t->next=NULL;
+ last->next=t;
+ last=t;
+ }
+}
+
+void Display(Node* first)
+{
+ Node* p=first;
+
+ while(p)
+ {
+ cout<<p->data<<" ";
+ p=p->next;
+ }
+ cout<<endl;
+}
+Node* reverse(Node* current){
+    Node* prev=NULL;
+    Node* nex=NULL;
+    while(current!=NULL){
+        nex=current->next;
+        current->next=prev;
+        prev=current;
+        current=nex;
+    }
+    current=prev;
+    return current;
+}
+Node* add(Node* first1,Node* first2){
+    first1=reverse(first1);
+    first2=reverse(first2);
+    int c=0;
+    int s=0;
+    Node* temp;
+    Node* res=NULL;
+    Node* curr=NULL;
+    while(first1!=NULL || first2!=NULL){
+        s=c+(first1?first1->data:0)+(first2?first2->data:0);
+        c=(s>=10)?1:0;
+        s=s%10;
+        temp=node(s);
+        
+        if(res==NULL) res=temp;
+        else curr->next=temp;
+        curr=temp;
+        if(first1) first1=first1->next;
+        if(first2) first2=first2->next;
+    }
+    if(c>0){
+        temp=node(c);
+        curr->next=temp;
+        curr=temp;
+    }
+    rev=reverse(res);
+    return rev;
+}
+
+
+int main()
+{ Node* first1=NULL;
+  Node* first2=NULL;
+  Node* newnode=NULL;
+  
+ int A1[]={3,4,9};
+ int A2[]={3,6,2};
+ 
+ create(first1,A1,3);
+ Display(first1);
+ create(first2,A2,3);
+ Display(first2);
+ cout<<"______"<<endl;
+ newnode=add(first1,first2);
+ Display(newnode);
+
+ return 0;
+}
+

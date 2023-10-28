@@ -1,0 +1,62 @@
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    Node* left;
+    Node* right;
+    int data;
+};
+
+Node* newNode(int data)
+{
+    Node *temp = new Node;
+    temp->data = data;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+void preorder(Node* root){
+    stack <Node*>s;
+    while(root!=NULL || !s.empty()){
+        if(root!=NULL){
+            cout<<root->data<<" ";
+            s.push(root);
+            root=root->left;
+        }
+        else{
+            root=s.top();
+            s.pop();
+            root=root->right;
+        }
+    }
+}
+Node* build(vector<int>& preorder,int &i,int bound){
+
+        if(i==preorder.size() || preorder[i]>bound) return NULL;
+        Node* root=newNode(preorder[i++]);
+        root->left = build(preorder,i,root->data);
+        root->right = build(preorder,i,bound);
+            return root;
+    }
+ Node* bstFromPreorder(vector<int>& preorder) {
+        int i=0;
+        return build(preorder,i,INT_MAX);
+    }
+ void printInorder(Node* node)
+{
+    if (node == NULL)
+        return;
+    printInorder(node->left);
+    cout << node->data << " ";
+    printInorder(node->right);
+}
+    
+int main(){
+    
+vector<int>v={8,5,1,7,10,12};
+  Node* ans=bstFromPreorder(v);
+  printInorder(ans);
+    return 0;
+}

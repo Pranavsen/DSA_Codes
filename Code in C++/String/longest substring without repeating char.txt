@@ -1,0 +1,36 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ int repeating(string s,int n){
+     int res=-1;
+     int i=0,j=0;
+     unordered_map<char,int>mp;
+     while(j<n){
+         mp[s[j]]++;
+         
+         if(mp.size()==j-i+1){
+             res=max(res,j-i+1);
+             j++;
+         }
+         else{
+             while(mp.size()<j-i+1){
+                 mp[s[i]]--;
+                 if(mp[s[i]]==0)
+                 mp.erase(s[i]);
+                 i++;
+             }
+             j++;
+         }     
+     }
+     return res;              //it is for return the length       
+ }
+
+int main()
+{
+    string s="geeksforgeeks";
+    int n=s.length();
+    cout<< repeating(s,n);
+
+    return 0;
+}

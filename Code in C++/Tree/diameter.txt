@@ -1,0 +1,50 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    Node* left;
+    Node* right;
+    int data;
+};
+
+Node* newNode(int data)
+{
+    Node *temp = new Node;
+    temp->data = data;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+  int ma;
+  int solve(Node* root){
+      if(root==NULL) return 0;
+      
+      int x=solve(root->left);
+      int y=solve(root->right);
+      
+      ma=max(ma,x+y+1);
+      return max(x,y)+1;
+  }
+  
+int diameter(Node* root){
+    ma=0;
+    solve(root);
+    return ma;
+}
+
+
+int main(){
+    
+  Node* root=newNode(3);
+  root->left=newNode(7);
+  root->right=newNode(5);
+  root->left->left=newNode(1);
+  root->left->right=newNode(4);
+  root->left->right->right=newNode(8);
+  root->right->left=newNode(2);
+ 
+  cout<<diameter(root);
+  
+    return 0;
+}

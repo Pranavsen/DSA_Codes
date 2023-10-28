@@ -1,0 +1,74 @@
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    Node* left;
+    Node* right;
+    int data;
+};
+
+Node* newNode(int data)
+{
+    Node *temp = new Node;
+    temp->data = data;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+ int f=1;
+   vector<int> zigzag(Node* root){
+       vector<int> ans;
+       queue<Node*> q;
+       
+       if(!root) return ans;
+       q.push(root);
+      
+       
+       while(!q.empty()){
+          vector<int> temp;
+          int sz=q.size();
+          
+          while(sz--){
+              Node* t=q.front();
+              temp.push_back(t->data);
+              q.pop();
+              
+              if(t->left) q.push(t->left);
+              if(t->right) q.push(t->right);
+             
+          }
+          
+          if(f%2==0) reverse(temp.begin(),temp.end());
+          
+          for(int i=0;i<temp.size();i++){
+              ans.push_back(temp[i]);
+              f=!f;
+          }
+         
+       }
+        return ans;
+   } 
+
+
+int main(){
+    
+  Node* root=newNode(3);
+  root->left=newNode(7);
+  root->right=newNode(5);
+  root->left->left=newNode(1);
+  root->left->right=newNode(4);
+  root->left->right->right=newNode(8);
+  root->right->left=newNode(2);
+  f=1;
+  vector<int> vec=zigzag(root);
+  for(int x:vec){
+      cout<<x<<" ,";
+  }
+  
+  
+    return 0;
+}

@@ -1,0 +1,27 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> solve(int arr[],int target){
+    int n=6;
+    vector<int>res;
+    unordered_map<int, int> mp;
+    for(int i=0;i<n;i++){
+        if(mp[target-arr[i]]){
+            res.push_back(mp[target-arr[i]]);
+            res.push_back(i);
+        }
+        mp[arr[i]]=i;
+    }
+    return res;
+}
+
+int main()
+{
+    int arr[]={3,2,4,6,1,5};
+   
+    int target=6;
+    vector<int>ans= solve(arr,target);
+    for(int it:ans)
+    cout<<it<<" ";
+    return 0;
+}

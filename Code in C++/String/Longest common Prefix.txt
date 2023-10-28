@@ -1,0 +1,38 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+string prefix(string S[]){
+   int n=4;
+   int count=0;
+   int flag=0;
+   int mini=INT_MAX;
+   string ans;
+   for(int i=0;i<n;i++){
+       if(S[i].length()<mini){
+           mini=S[i].length();
+           ans=S[i];
+       }
+   }
+   for(int i=0;i<mini;i++){
+    for(int j=0;j<n;j++){
+        if(S[j][i]!=ans[i]){
+            flag=1;
+            break;
+        }
+    }
+        if(flag==1)
+         break;
+        count++;
+    }
+    if(count==0)
+        return "-1";
+    else
+        return S[0].substr(0,count);
+}
+int main()
+{
+    string S[]={"geeksforgeeks","geeks","geezer","geek"};
+    cout<<prefix(S);
+    return 0;
+}

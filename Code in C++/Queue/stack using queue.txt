@@ -1,0 +1,40 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+class MyStack{
+    public:
+    queue<int>q;
+    void push(int val){
+        q.push(val);
+        int sz= q.size()-1;
+        while(sz--){
+            q.push(q.front());
+            q.pop();
+        }
+    }
+    int pop(){
+        int ans;
+    if(q.empty()){
+        ans=-1;
+    }
+    else{
+        ans=q.front();
+        q.pop();
+    }
+    return ans;
+    }
+   
+};
+
+int main()
+{
+    MyStack s;
+    s.push(2);
+    s.push(4);
+    s.push(6);
+    s.push(8);
+    s.push(10);
+    cout<<s.pop();
+   
+    return 0;
+}

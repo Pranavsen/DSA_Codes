@@ -1,0 +1,26 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+vector<string>ans;
+void permutation(string s,int i,int size){
+   if(i>=size)
+   return;
+    for(int j=i;j<size;j++){
+        swap(s[i],s[j]);
+        if(i==(size-1)){
+            ans.push_back(s);
+        }
+        permutation(s,i+1,size);
+    }
+}
+
+int main()
+{
+    string s="ABCD";
+    int size=s.length();
+    permutation(s,0,size);
+    for(string it:ans){
+        cout<<it<<" ";
+    }
+    return 0;
+}

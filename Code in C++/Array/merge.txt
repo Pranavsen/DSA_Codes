@@ -1,0 +1,47 @@
+
+//merge 2 array
+#include <bits/stdc++.h>
+using namespace std;
+void sortedMerge(int A[],int B[],int C[],int n,int m){
+    
+      
+    int i = 0, j = 0, k = 0;  
+    while (i < n && j < m) { // After the array are sorted compare and merge to third array   
+        if (A[i] <= B[j]) { // if element of a is less than b   
+            C[k] = A[i]; // put element of a into the res and increment i   
+            i += 1;  
+            k += 1;  
+        } else {  
+            C[k] = B[j]; // otherwise put the element  of b into the  res array and increment j  
+            j += 1;  
+            k += 1;  
+        }  
+    }  
+    while (i < n) { // If array a elements are left in the array put in res  
+        C[k] = A[i];  
+        i += 1;  
+        k += 1;  
+    }  
+    while (j < m) { // If array a elements are left in the array put in res  
+        C[k] = B[j];  
+        j += 1;  
+        k += 1;  
+    }  
+     //sort(C, C + n + m);
+} 
+int main() {
+    
+    int A[]={ 5, 15, 19, 100};
+    int B[]={ 3,8,9,21,200};
+     int n = sizeof(A) / sizeof(A[0]); // find the size of array a  
+    int m = sizeof(B) / sizeof(B[0]); // find the size of array b  
+    int C[n+m];
+    sortedMerge(A,B,C,n,m);
+   // printArray(C,m+n);
+   cout << "The sorted array is: ";  
+    for (int i = 0; i < n + m; i++)  
+        cout << " " << C[i];  
+    cout << "\n";  
+  
+    return 0;
+}

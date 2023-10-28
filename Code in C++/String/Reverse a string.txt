@@ -1,0 +1,27 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+string reverseword(string s){
+    string s2;
+    int r;
+    int len=s.length();
+    for(int i=len-1;i>=0;i--){
+        if(s[i]=='.'){
+            r=len-i;
+            len=i-1;
+            s2.append(s.substr(i+1,r));
+            s2.append(".");
+        }
+    }
+    s2.append(s.substr(0,len+1));
+    return s2;
+}
+
+int main()
+{
+    string s="i.am.in.the.interview";  
+    cout<<reverseword(s);
+
+    return 0;
+}

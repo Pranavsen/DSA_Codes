@@ -1,0 +1,360 @@
+Linux Assignment
+
+Assignment 1:
+Section 1:
+1) cd bin | ls –l
+2) ls -a
+3) ls r*
+4) ls -a ???
+5) ls -a *.doc
+6) ls [l-s]*
+7) cat > text1
+8) cp text1 text2
+9) cat >> text1 text2
+10) ls|wc -w
+11) ls -l > file1 and cat file1
+12) tail +10 text1
+13) who|wc -l
+14) rm tmp*
+
+Section 2:
+1) wc text1
+2) ls | less
+3) vi FILE2
+   a=$( pwd )
+   ln $a"/FILE2" $a"/hardlink1.txt"
+   ln $a"/FILE2" $a"/hardlink2.txt"
+   #echo "Inode number"
+   ls -i 
+
+4) who; pwd
+5) echo "Today is $(date+%a) $(date+%d) $(date+%h) $ (date+%y) "
+6) echo “Deposited \$100 to you account” 
+7) echo "The long listing of my home dir 'pwd' is 'ls –l' "
+
+Section 3:
+1. Using vi editor:
+a) Create a file “Data1.txt
+   vi Data1.txt
+
+b) Save the file and exit from the vi editor.
+:wq!
+
+c) Open the vi editor without specifying a file name
+vi
+
+d) Write some text and and save it to a file “MyData2.txt”
+:w MyData2.txt
+
+e) Repeat point ( c ) but after writing some text don’t save and just exit “vi”
+vi
+:q! 
+
+
+/**************************************************************************************/
+Assignment 2: 
+1.List only the directories in your current directory
+ls -d */
+
+2.Display the name and count of the directories in the current directory.
+ls | wc -l
+
+12. Write a menu based shell script which will perform arithmetic operations on two numbers which are inputted by user. Menu should display following operations
+
+              Menu
+          --------------
+          1: Addition
+          2: Substraction
+          3: Multiplication
+          4: Division
+          5: Exit 
+
+#!/bin/bash 
+
+echo "--------CALCULATOR--------"
+echo "Press + for Addition"
+echo "Press - for Subtraction"
+echo "Press * for Multiplication"
+echo "Press / for Division"
+echo "Press e for EXIT"
+
+read -p "n1=> " a
+read -p "Op=> " op
+read -p "n2=> " b
+
+if [[ $op == + ]]
+then
+	result=$(( $a+$b ))
+elif [[ $op == - ]]
+then
+	result=$(( $a-$b ))
+elif [[ $op == \* ]]
+then
+	result=$(( $a*$b ))
+elif [[ $op == / ]]
+then
+	result=$(( $a/$b ))
+else
+	echo "Invalid Input"
+
+fi
+echo "________"
+echo "Ans= $result"
+
+
+14.Write a shell script that will accept a string from the user. Copy all contents of the file to other file without that string. Also display number of characters, lines, and words.
+
+#!/bin/bash
+
+read -p "Enter file you want to delete/remove: " fname
+location=$( pwd ) 
+user="abhishek"
+
+mkdir "/home/"$user"/backup/"
+ln $location"/"$fname "/home/"$user"/backup/"
+
+rm -i $location"/"$fname
+
+
+15. Write a shell script which will generate the O/P as follows
+
+               *
+     * * *  * * * * * *
+               *
+#!/bin/bash
+
+echo "       *     "
+echo "*** ******"
+echo "       *     "
+
+16.Write a shell script which will accept three nos. from the keyboard and finds the largest of them.
+#!/bin/bash
+
+read -p "Enter number 1 " no1
+read -p "Enter number 2 " no2
+read -p "Enter number 3 " no3
+
+if [ $no1 -gt $no2 ] && [ $no1 -gt $no2 ]
+then
+	echo "$no1 is the largest"
+elif [ $no2 -gt $no1 ] && [ $no2 -gt $no3 ]
+then
+	echo "$no2 is the largest"
+elif [ $no3 -gt $no1 ] && [ $no3 -gt $no2 ]
+then
+	echo "$no3 is the largest"
+else
+	echo "Numbers equal"
+fi
+
+
+
+/**************************************************************************************/
+
+Assignment 3:
+
+1. Write a shell script which will generate the O/P as follows
+
+*
+**
+***
+****
+
+#!/bin/bash
+
+
+for (( i=1;i<5;i++ ))
+do
+	for(( j=1; j<=i; j++ ))
+	do
+		echo -n "*"
+	done
+	echo ""
+done
+
+2.Accept the first name, middle name, and last name of a person in variables fname, mname and lname respectively. Greet the person (take his full name) using appropriate message. 
+#!/bin/bash
+
+read -p "Enter first name: " fname
+read -p "Enter middle name: " mname
+read -p "Enter last name: " lname
+
+
+echo "Hello $fname $mname $lname, welcome to bash scripting"
+
+5.Write a script that accepts a member into MBT health club, if the weight of the person is withing the range of 30-250 Kgs.
+#!/bin/bash
+
+echo "Enter your weight in Kgs: "
+read weight
+
+if (( weight>=30 && weight<=250 ))
+	then
+		echo "Congratulations! you are eligible to become a member of the MBT health club"
+	else
+		echo "Sorry, your weight is not within the eligible range for the MBT health club"
+fi
+
+6.Write a shell script that greets the user with an appropriate message depending on the system time.
+#!/bin/bash
+
+hour=$(date +%H)
+
+if ((hour>=0 && hour<12))
+then
+	echo "Good morning, user!"
+elif ((hour>=12 && hour<17))
+then
+	echo "Good Afternoon, user!"
+else
+	echo "Good evening, user!"
+fi
+
+
+
+/**************************************************************************************/
+
+Assignment 4:
+
+1.Develop a shell script to print the username, current date & time, and current directory.
+#!/bin/bash
+
+echo -n "Username is: "
+#x=whoami
+#echo $x
+whoami
+echo -n "Current date and time: "
+date
+echo -n "Present working directory: "
+pwd
+
+2.Write a shell script to print sum of all digit of a given number.For e.g. If no is 123, sum of all its digit will be 1+2+3 = 6
+#!/bin/bash
+
+echo "Enter a number: "
+read no
+
+sum=0
+
+while [ $no -gt 0 ]
+do 
+	digit=$((no%10))
+	sum=$((sum+digit))
+	no=$((no/10))
+done
+
+echo "The sum of all digit is : $sum"
+
+3.Develop a shell script to compare three numbers and print the largest. Give the numbers from the
+command line.
+#!/bin/bash
+
+read -p "Enter number 1 " no1
+read -p "Enter number 2 " no2
+read -p "Enter number 3 " no3
+
+if [ $no1 -gt $no2 ] && [ $no1 -gt $no2 ]
+then
+	echo "$no1 is the largest"
+elif [ $no2 -gt $no1 ] && [ $no2 -gt $no3 ]
+then
+	echo "$no2 is the largest"
+elif [ $no3 -gt $no1 ] && [ $no3 -gt $no2 ]
+then
+	echo "$no3 is the largest"
+else
+	echo "Numbers equal"
+fi
+
+7.Write a shell script called calculator using case structure, which takes arguments from command
+line eg., 2+3, 2*3 etc. and displays the result. It should perform the following operations:
+a.Addition
+b.Subtraction
+c.Multiplication
+d.Division
+#!/bin/bash
+
+echo "---CALCULATOR---"
+echo "CAUTION: USE SPACE IN BETWEEN OPERAND AND OPERATOR "
+echo ""
+echo "OPERAND"
+echo "Press + for Addition"
+echo "Press - for Subtraction"
+echo "Press * for Multiplication"
+echo "Press / for Division"
+echo "Press ^ for Power"
+echo ""
+
+read -p "" num1 op num2
+#echo -n $num1 $operator $num2
+operator=$op
+result=1
+if [ "$operator" == "+" ]
+then
+	result=$(( $num1+$num2 ))
+elif [ "$operator" == "-" ]
+then
+	result=$(( $num1-$num2 ))
+elif [ "$operator" == "*" ]
+then
+	result=$(( $num1*$num2 ))
+elif [ "$operator" == "/" ]
+then
+	result=$(( $num1/$num2 ))
+elif [ "$operator" == "^" ]
+then
+	for (( i=1; i<=num2; i++ ))
+	do
+		result=$(( $result*$num1 ))
+	done
+else
+	echo "Invalid operator"
+fi
+
+echo -n " = $result"
+echo ""
+
+13.Write script to print given number in reverse order, for eg. If no is 123 it must print as 321
+#!/bin/bash
+
+echo "Enter a number: "
+read no
+
+reversed=0
+
+while [ $no -gt 0 ]
+do
+	digit=$((no%10))
+	reversed=$((reversed*10+digit))
+	no=$((no/10))
+done
+
+echo "The number in reversed order is : $reversed"
+
+
+14.Write script to print nos as 5,4,3,2,1 using while loop
+#!/bin/bash
+
+no=5
+
+while [ $no -ge 1 ]
+do
+	echo $no
+	no=$((no-1))
+done
+
+
+15.Write script to find out factorial for a given no
+#!/bin/bash
+
+echo "Enter a number: "
+read number
+
+factz=1
+
+for (( i=1;i<=number;i++))
+do
+	factz=$((factz*i))
+done
+
+echo "Factorial of $number is $factz"

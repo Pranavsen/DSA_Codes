@@ -1,0 +1,38 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+  bool rotateString(string s, string goal) {
+        string temp1,temp2;
+        int len1=s.length();
+        int len2=goal.length();
+        
+        if(len1<2 || len2<2){
+            if(s==goal)
+            	return true;
+            else
+            	return false;
+        }
+        else{
+            temp1.append(s.substr(2,len1-2));
+            temp1.append(s.substr(0,2));
+            
+            temp2.append(s.substr(len1-2,2));
+            temp2.append(s.substr(0,len1-2));
+        
+            if(temp1==goal || temp2==goal)
+                return true;
+            else
+                return false;
+        
+    }
+    }
+
+int main()
+{
+    string s="amazon";  
+    string goal="azonam";
+    cout<<rotateString(s,goal);
+
+    return 0;
+}

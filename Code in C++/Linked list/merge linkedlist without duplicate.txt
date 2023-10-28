@@ -1,0 +1,90 @@
+
+#include <iostream>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+};
+Node* newnode(int val){
+    Node* temp=new Node;
+    temp->data=val;
+    temp->next=NULL;
+    return temp;
+}
+
+Node* mergelist(Node* head1,Node* head2){
+    Node* dummy=newnode(-1);
+    Node* temp=dummy;
+    while(head1 && head2){
+        if(head1->data<=head2->data){
+            temp->next=head1;
+            head1=head1->next;
+        }
+        else{
+            temp->next=head2;
+            head2=head2->next;
+        }
+        temp=temp->next;
+    }
+    while(head1){
+            temp->next=head1;
+            head1=head1->next;
+             temp=temp->next;
+        }
+        while(head2){
+            temp->next=head2;
+            head2=head2->next;
+             temp=temp->next;
+        }
+        return dummy->next;
+}
+void removeduplicate(Node* head){
+    Node* current=head;
+    Node* next_next;
+    while(current->next!=NULL){
+        if(current->data==current->next->data){
+            next_next=current->next->next;
+            delete(current->next);
+            current->next=next_next;
+        }
+        else{
+            current=current->next;
+        }
+    }
+}
+
+Node* mergewithoutduplicate(Node* head1,Node* head2){
+    Node* temp;
+    temp=mergelist(head1,head2);
+    removeduplicate(temp);
+    return temp;
+}
+
+
+void display(Node* head){
+while(head!=NULL){
+    cout<<head->data<<" ";
+    head=head->next;
+}
+}
+int main()
+{
+    Node* head1 = newnode(1);
+    head1->next = newnode(1);
+    head1->next->next = newnode(4);
+    head1->next->next->next = newnode(5);
+    head1->next->next->next->next = newnode(7);
+ 
+    // head2: 2->4->7->9
+    Node* head2 = newnode(2);
+    head2->next = newnode(4);
+    head2->next->next = newnode(7);
+    head2->next->next->next = newnode(9);
+    
+    Node* head3;
+    head3=mergewithoutduplicate(head1,head2);
+    display(head3);
+
+    return 0;
+}

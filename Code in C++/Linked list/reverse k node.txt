@@ -1,0 +1,74 @@
+//Linked List CPP
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+ int data;
+ Node *next;
+};
+
+ 
+void create(Node* &first,int A[],int n)
+{
+ Node *last,*t;
+ int i=0;
+
+ first=new Node;
+ first->data=A[0];
+ first->next=NULL;
+ last=first;
+ 
+ for(i=1;i<n;i++)
+ {
+ t=new Node;
+ t->data=A[i];
+ t->next=NULL;
+ last->next=t;
+ last=t;
+ }
+}
+
+void Display(Node* first)
+{
+ Node* p=first;
+
+ while(p)
+ {
+ cout<<p->data<<" ";
+ p=p->next;
+ }
+ cout<<endl;
+}
+Node* reversek(Node* first,int k){
+    Node* prev=NULL;
+    Node* current=first;
+    Node* nextptr;
+    int count=0;
+    while(current!=NULL && count<k){
+        nextptr=current->next;
+        current->next=prev;
+        prev=current;
+        current=nextptr;
+        count++;
+    }
+    if(nextptr!=NULL)
+     first->next=reversek(nextptr,k);
+     
+     return prev;
+}
+
+
+int main()
+{ 
+ Node* first=NULL;
+ int A1[]={2,5,9,12,15,20};
+ create(first,A1,6);
+ Display(first);
+ int k=3;
+ Node* newnode=reversek(first,k);
+ Display(newnode);
+ return 0;
+}
+

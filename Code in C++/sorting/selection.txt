@@ -1,0 +1,35 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void selection(int arr[],int size){
+    int i,j,index;
+    for(i=0;i<size-1;i++){
+        index=i;
+    for(j=i+1;j<size;j++){
+        if(arr[j]<arr[index])
+        index=j;
+    }
+    if(index!=i){
+        swap(arr[index],arr[i]);
+    }
+    }
+}
+
+void printArray(int arr[], int size) {
+  for (int i = 0; i < size; i++)
+    cout << arr[i] << " ";
+  cout << endl;
+}
+
+int main()
+{
+  int arr[] = {6, 5, 12, 10, 9, 1};
+  int size = sizeof(arr) / sizeof(arr[0]);
+
+  selection(arr,size);
+
+  cout << "Sorted array: \n";
+  printArray(arr, size);
+  return 0;
+}

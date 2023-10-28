@@ -1,0 +1,56 @@
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    Node* left;
+    Node* right;
+    int data;
+};
+
+Node* newNode(int data)
+{
+    Node *temp = new Node;
+    temp->data = data;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+void levelorder(Node* root){
+    if(!root) cout<<0;
+    
+    queue<Node*> q;
+    cout<<root->data<<" ,";
+    q.push(root);
+    
+    while(!q.empty()){
+        Node* t=q.front();
+        q.pop();
+        
+        if(t->left){
+            cout<<t->left->data<<" ,";
+            q.push(t->left);
+        }
+        if(t->right){
+            cout<<t->right->data<<" ,";
+            q.push(t->right);
+        } 
+    }
+}
+
+
+int main(){
+    
+  Node* root=newNode(3);
+  root->left=newNode(7);
+  root->right=newNode(5);
+  root->left->left=newNode(1);
+  root->left->right=newNode(4);
+  root->left->right->right=newNode(8);
+  root->right->left=newNode(2);
+ 
+  levelorder(root);
+  
+    return 0;
+}
