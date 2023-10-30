@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class FirstLastPositionOfElement {
+    public static int binaryFirstSearch(int arr[],int target){
+        int start =0;
+        int end = arr.length-1;
+        int firstOccur = -1;
+        
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            if(arr[mid]==target){
+                firstOccur = mid;
+                end = mid -1;
+            }else if(arr[mid]>target){
+                end = mid-1;
+            }else{
+                start = mid+1;
+            }
+        }
+        return firstOccur;
+    }
+    public static int binaryLastSearch(int arr[],int target){
+        int start =0;
+        int end = arr.length-1;
+        int lastOccur = -1;
+        
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            if(arr[mid]==target){
+                lastOccur = mid;
+                start = mid + 1;
+            }else if(arr[mid]>target){
+                end = mid-1;
+            }else{
+                start = mid+1;
+            }
+        }
+        return lastOccur;
+    }
+    public static void main(String[] args) {
+        int arr[] = {1, 4, 4, 10, 10, 15, 20};
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the targeted value : ");
+        int target = sc.nextInt();
+
+        int first = binaryFirstSearch(arr,target);
+        int last = binaryLastSearch(arr,target);
+        System.out.println("First Occurence is : "+ first +" & Second is : "+last);
+
+        sc.close();
+    }
+}
