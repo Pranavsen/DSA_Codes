@@ -1,0 +1,77 @@
+class StackUsingLinkedList {
+    private class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+            next = null;
+        }
+    }
+
+    private Node top;
+    private int size;
+
+    public StackUsingLinkedList() {
+        this.top = null;
+        this.size = 0;
+    }
+
+    public void push(int element) {
+        Node temp = new Node(element);
+        temp.next = top;
+        top = temp;
+        size++;
+    }
+
+    public int pop() {
+
+        int popelement = -1;
+        if (isEmpty()) {
+            System.out.println("Stack is Underflow\n");
+        } else {
+            popelement = top.data;
+            top = top.next;
+            size--;
+        }
+        return popelement;
+    }
+
+    public boolean isEmpty() {
+        return top == null;
+    }
+
+    public void display() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty\n");
+        } else {
+            Node currNode = top;
+            while (currNode != null) {
+                System.out.print(currNode.data + " ");
+                currNode = currNode.next;
+            }
+            System.out.println();
+        }
+    }
+
+}
+
+public class Stack2 {
+    public static void main(String[] args) {
+        StackUsingLinkedList stk = new StackUsingLinkedList();
+        stk.push(2);
+        stk.push(4);
+        stk.push(6);
+        stk.push(8);
+        stk.push(10);
+        stk.push(12);
+        stk.push(14);
+        stk.display();
+
+        System.out.println("Poped element : ");
+        System.out.println(stk.pop());
+        System.out.println(stk.pop());
+
+        stk.display();
+    }
+}
