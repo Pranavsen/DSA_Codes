@@ -9,7 +9,7 @@ public class ReverseLL {
         }
     }
 
-    static Node head;
+    Node head;
 
     public ReverseLL() {
         this.head = null;
@@ -48,9 +48,9 @@ public class ReverseLL {
         reverseLL.head.next.next.next.next.next.next = new Node(14);
 
         System.out.println("Before Reverse : ");
-        reverseLL.display(head);
+        reverseLL.display(reverseLL.head);
         System.out.println("\nAfter Reversed : ");
-        Node ans = reverseLL.ReverseNode(head);
+        Node ans = reverseLL.ReverseNode(reverseLL.head);
         reverseLL.display(ans);
     }
 }

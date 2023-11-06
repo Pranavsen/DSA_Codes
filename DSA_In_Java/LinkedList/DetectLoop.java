@@ -10,7 +10,7 @@ public class DetectLoop {
         }
     }
 
-    static Node head;
+    Node head;
 
     public DetectLoop() {
         this.head = null;
@@ -88,9 +88,9 @@ public class DetectLoop {
         detectLoop.head.next.next.next.next = new Node(10);
         detectLoop.head.next.next.next.next.next = new Node(12);
         detectLoop.head.next.next.next.next.next.next = new Node(14);
-        detectLoop.head.next.next.next.next.next.next.next = head.next;
+        detectLoop.head.next.next.next.next.next.next.next = detectLoop.head.next;
 
-        detectLoop.DetectandRemove(head);
-        detectLoop.display(head);
+        detectLoop.DetectandRemove(detectLoop.head);
+        detectLoop.display(detectLoop.head);
     }
 }
