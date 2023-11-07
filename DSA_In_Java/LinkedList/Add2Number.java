@@ -28,8 +28,32 @@ public class Add2Number {
         return prev;
     }
 
-    public Node add(Node head1, Node head2){
-        
+    public Node add(Node first, Node second){
+
+        int carry =0;
+        int sum=0;
+        Node temp;
+        Node res=null;
+        Node curr=null;
+        while (first!=null || second!=null) {
+            sum = carry + (first != null?first.data:0) + (second != null?second.data:0);
+            carry = sum>=10 ? 1:0;
+            sum = sum % 10;
+            temp = new Node(sum);
+            if(res==null) res = temp;
+            else curr.next = temp;
+            curr=temp;
+
+            if(first!=null) first = first.next;
+            if(second!=null) second = second.next;
+        }
+
+        if(carry>0){
+            temp = new Node(carry);
+            curr.next = temp;
+            curr=temp;
+        }
+        return res;
     }
 
     public Node addingNumber(Node head1,Node head2){
@@ -58,13 +82,12 @@ public class Add2Number {
     public static void main(String[] args) {
         Add2Number add2Number = new Add2Number();
 
-        Node head1 = new Node(4);
-        head1.next = new Node(5);
-        // head2.next.next = new Node(9);
+        Node head1 = new Node(9);
+        head1.next = new Node(9);
 
-        Node head2 = new Node(3);
-        head2.next = new Node(4);
-        head2.next.next = new Node(5);
+        Node head2 = new Node(9);
+        head2.next = new Node(9);
+        head2.next.next = new Node(9);
 
         System.out.println("LinkedList 1  after adding One: ");
         Node sol1 = add2Number.addingNumber(head1,head2);
