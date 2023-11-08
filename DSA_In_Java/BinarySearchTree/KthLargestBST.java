@@ -20,7 +20,7 @@ public class KthLargestBST {
         solve(root.right, k, count);
         if (k == count) {
             ans = root.data;
-            count++;
+            return;
         } else {
             count++;
         }
