@@ -1,4 +1,4 @@
-public class KthLargestBST {
+public class KthSmallest {
     private static class Node {
         private int data;
         private Node left;
@@ -11,48 +11,42 @@ public class KthLargestBST {
         }
     }
 
-    public static int ans;
+    public int ans;
 
-    public static void solve(Node root, int k, int count) {
+    public void solve(Node root, int k, int count) {
         if (root == null) {
             return;
         }
-        solve(root.right, k, count);
+        solve(root.left, k, count);
         if (k == count) {
             ans = root.data;
             return;
         } else {
             count++;
         }
-        solve(root.left, k, count);
+        solve(root.right, k, count);
     }
 
-    public static int kthLargest(Node root, int k) {
+    public int kthSmall(Node root, int k) {
         int count = 1;
         ans = -1;
         solve(root, k, count);
         return ans;
     }
-    // public static void inorder(Node root){
-    //     if(root==null) return;
-    //     inorder(root.left);
-    //     System.out.println(root.data+" ");
-    //     inorder(root.right);
-    // }
 
     public static void main(String[] args) {
+        KthSmallest kthSmallest = new KthSmallest();
         Node root = new Node(8);
         root.left = new Node(4);
         root.right = new Node(11);
         root.left.left = new Node(2);
         root.left.right = new Node(6);
-        root.right.left = new Node(10);       
-         root.right.right = new Node(12);
+        root.right.left = new Node(10);
+        root.right.right = new Node(12);
 
-
-        int k = 2;
-        int sol = kthLargest(root, k);
-        System.out.println("Kth Largest element is : " + sol);
+        int k = 3;
+        int sol = kthSmallest.kthSmall(root, k);
+        System.out.println("Kth Smallest element is : " + sol);
 
     }
 }
